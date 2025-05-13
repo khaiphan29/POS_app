@@ -1,0 +1,19 @@
+<% content_for :page_layout do %>
+  <%= render 'shared/navbar' %>
+  <main class='flex flex-1 gap-[var(--primary-gap)]' data-controller="admin">
+    <div id="admin_sidebar" class=" p-4 bg-white w-[15vw] flex flex-col gap-[var(--primary-gap)]">
+      <% link_class = "p-[var(--primary-gap)] font-normal border-1 border-gray-100 rounded-md hover:border-blue-500 hover:text-white! hover:bg-blue-500" %>
+      <% link_class_active = "border-blue-500! text-white! bg-blue-500" %>
+      <%= active_link_to "Sản phẩm", admin_products_path, class: link_class, active_class: link_class_active %>
+      <%= active_link_to "Danh mục", admin_categories_path, class: link_class, active_class: link_class_active %>
+    </div>
+    <section class="mr-[var(--right-section-width)] bg-white flex-[3]">
+      <%= yield :main_content %>
+    </section>
+    <section class="fixed top-[var(--top-height)] bottom-0 right-0  w-[var(--right-section-width)] bg-white flex-1" data-admin-target="form">
+      <%= yield :form_section %>
+    </section>
+  </main>
+<% end %>
+
+<%= render template: 'layouts/application' %>

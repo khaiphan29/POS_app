@@ -1,0 +1,29 @@
+<% content_for :page_layout do %>
+  <main class="flex flex-1" data-controller="order">
+    <section class='flex-1'>
+      <%= render 'shared/navbar' %>
+      <div class="flex flex-1 gap-[var(--primary-gap)]">
+        <div class='flex-[3]'>
+          <div class="px-3 flex gap-[var(--primary-gap)]">
+            <%= render 'category_card' %>
+            <% @categories.each do |category| %>
+              <%= render 'category_card', category: category %>
+            <% end %>
+          </div>
+          <div class="p-4 grid grid-cols-5 gap-[var(--primary-gap)]">
+            <% @products.each do |product| %>
+              <%= render 'product_card', order: @order, product: product %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white w-[var(--right-section-width)] shadow-lg h-screen" >
+      <%= render 'orders/form', order: @order, cart: true%>
+    </section>
+  </main>
+<% end %>
+
+<% content_for :left_layout do %>
+<% end %>

@@ -1,0 +1,19 @@
+<% content_for :main_content do %>
+  <div class='py-4 px-10 border-r-2 border-gray-100 flex-1 h-full'>
+    <h2 class='text-4xl!'>Sản phẩm</h2>
+    <div class='flex justify-between items-center'>
+      <p>Tổng cộng <%= @products_count %> sản phẩm </p>
+      <button type="button" data-action='click->admin#getForm' data-url='<%= new_admin_product_path %>'>Thêm sản phẩm</button>
+    </div>
+
+    <div class="rounded-md mt-4 flex flex-col">
+      <% @parent_categories.each do |category| %>
+        <%= render 'section', category: category %>
+      <% end %>
+      <%= render 'section', category: @dump_category %>
+    </div>
+  </div>
+<% end %>
+<% content_for :form_section do %>
+  <%= render 'form', product: @new_product, child_categories: @child_categories, heading: "Tạo sản phẩm mới", url: admin_products_path %>
+<% end %>

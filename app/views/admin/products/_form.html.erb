@@ -1,0 +1,33 @@
+<%= form_with model: product, url: url, data: { admin_target: 'form' }, class: "flex flex-col justify-between" do |f| %>
+  <div class="p-[var(--primary-gap)]">
+    <h3><%= heading %></h3>
+    <div class="field" >
+      <% if product.image.attached? %>
+        <%= image_tag product.image, class: 'w-full object-cover aspect-square' %>
+      <% end %>
+    </div>
+
+    <div class="field" >
+      <%= f.label :image, "Ảnh sản phẩm" %>
+      <%= f.file_field :image %>
+    </div>
+    <div class="field">
+      <%= f.label :name, "Tên sản phẩm" %>
+      <%= f.text_field :name, autocomplete: 'off' %>
+    </div>
+
+    <div class="field">
+      <%= f.label :price, "Giá" %>
+      <%= f.number_field :price %>
+    </div>
+
+    <div class="field">
+      <%= f.label :category_id, "Danh mục sản phẩm" %>
+      <%= f.collection_select :category_id, child_categories, :id, :name, { include_blank: true }, { class: 'form-select' } %>
+    </div>
+  </div>
+
+  <div class="actions mt-8">
+    <%= f.submit "Xác nhận" %>
+  </div>
+<% end %>

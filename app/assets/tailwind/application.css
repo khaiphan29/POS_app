@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+   --color-purple-10: #4149D9;
+   --color-purple-20: #435AD9;
+   --color-primary-bg: #F6F6F6;
+
+   --primary-gap: 0.8rem;
+   --top-height: 3.5rem;
+   --remaining-height: calc(100vh - var(--top-height));
+   --right-section-width: max(20rem, 25vw);
+
+   --diagonal-stripes: repeating-linear-gradient(
+   45deg,
+   var(--color-purple-10),
+   var(--color-purple-10) 16px,
+   var(--color-purple-20) 16px,
+   var(--color-purple-20) 32px
+   );
+   --diagonal-stripes-reverse: repeating-linear-gradient(
+   45deg,
+   var(--color-purple-20),
+   var(--color-purple-20) 16px,
+   var(--color-purple-10) 16px,
+   var(--color-purple-10) 32px
+   );
+}
+
+@utility bg-diagonal-stripes {
+   background: var(--diagonal-stripes);
+}
+
+@utility bg-diagonal-stripes-reverse {
+   background: var(--diagonal-stripes-reverse);
+}
+
+@utility border-stripes {
+   border-image: var(--diagonal-stripes) 1;
+   @apply border-[8px] border-solid;
+}
+
+@utility border-gray-dashed {
+   @apply border-dashed border-b-2 border-gray-100;
+}
+
+* {
+   font-family: "Quicksand", sans-serif;
+   @apply transition-all duration-200;
+}
+
+body {
+   /*font-size: 14px;*/
+   @apply font-light;
+   @apply text-sm bg-primary-bg min-h-screen;
+}
+
+h2, h3 {
+   @apply text-2xl font-bold;
+}
+
+nav a {
+   @apply px-4 py-3 rounded-full bg-white hover:brightness-90 hover:text-black!;
+}
+
+
+form {
+   @apply flex-1 h-full w-full;
+}
+
+form input, select {
+   @apply w-full p-2 border border-gray-400 rounded text-xl;
+}
+
+form label {
+   @apply text-lg font-semibold text-gray-600;
+}
+
+form .field {
+   @apply w-full mt-5;
+}
+
+form .actions {
+   @apply bg-blue-600 w-full py-3 text-lg text-white hover:brightness-90;
+}
+
+form .actions input {
+   @apply border-0;
+}
+
+/* Remove spinner for Chrome, Safari, Edge */
+input[type=number].no-spinner::-webkit-inner-spin-button,
+input[type=number].no-spinner::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove spinner for Firefox */
+input[type=number].no-spinner {
+  -moz-appearance: textfield;
+}
+
+button {
+   @apply hover:cursor-pointer;
+}
+
+img {
+   @apply aspect-4/3 object-cover rounded-md;
+}
+

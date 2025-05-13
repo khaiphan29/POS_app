@@ -1,0 +1,15 @@
+<div class='border-2 border-gray-100 p-4'>
+  <div class='flex justify-between items-center '>
+    <p class='font-normal'><%= category.name %></p>
+    <div class='flex gap-4'>
+      <%#<button type="button">Thêm danh mục con</button>%>
+      <%= link_to 'Chỉnh sửa', edit_admin_category_path(category), remote: true, class: 'text-blue-500 hover:underline' %>
+      <%= button_to 'Xoá', admin_category_path(category), method: :delete, class: 'text-red-500 hover:underline', data: { confirm: "Bạn có muốn xoá danh mục" } %>
+    </div>
+  </div>
+  <div class='grid grid-cols-2 gap-[var(--primary-gap)]'>
+    <% category.children.each do |child| %>
+      <%= render 'card', category: child %>
+    <% end %>
+  </div>
+</div>

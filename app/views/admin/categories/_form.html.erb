@@ -1,0 +1,18 @@
+<%= form_with model: category, url: url, class: "flex flex-col justify-between" do |f| %>
+  <div class='p-[var(--primary-gap)]'>
+    <h3 class="text-3xl font-bold">Tạo danh mục</h3>
+    <div class="field">
+      <%= f.label :name, "Tên danh mục" %>
+      <%= f.text_field :name, autocomplete: :off %>
+    </div>
+
+    <div class="field">
+      <%= f.label :parent_id, "Thuộc danh mục" %>
+      <%= f.collection_select :parent_id, parent_categories, :id, :name, { include_blank: true }, { class: 'form-select' } %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Xác nhận" %>
+  </div>
+<% end %>

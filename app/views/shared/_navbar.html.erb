@@ -1,0 +1,30 @@
+<% if user_signed_in? %>
+  <header class="sticky top-0 left-0 right-0 z-10 bg-primary-bg ">
+    <nav class="p-[var(--primary-gap)] h-[var(--top-height)] flex justify-between items-center">
+      <div class="flex gap-[var(--primary-gap)]">
+        <%= link_to "Lên đơn", root_path %>
+
+        <% if @order_count %>
+          <%= link_to orders_path(status: Order.statuses[ :pending ]), class: "items-center" do %>
+            <span class="inline-block mr-1 w-2 h-2 bg-yellow-400 rounded-full"></span>
+            <%= @order_count %> đơn hàng
+          <% end %>
+        <% end %>
+
+      </div>
+      <div class="flex gap-[var(--primary-gap)]">
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <%= link_to "Quản lý", admin_products_path %>
+          <% end %>
+          <div class='rounded-3xl pl-4 bg-white flex justify-center items-center gap-3'>
+            <%= current_user.email %>
+            <%= link_to "Đăng xuất", destroy_user_session_path, method: :delete, class: {} %>
+          </div>
+        <% else %>
+          <%= link_to "Đăng nhập", new_user_session_path %>
+        <% end %>
+      </div>
+    </nav>
+  </header>
+<% end %>

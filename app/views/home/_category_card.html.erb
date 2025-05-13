@@ -1,0 +1,5 @@
+<% if local_assigns.key?(:category) %>
+  <%= link_to category.name, root_path(category: category.id), { class: 'rounded-md bg-white p-4'} %>
+<% else %>
+  <%= link_to "Tất cả", root_path, { class: 'rounded-md bg-white p-4'} %>
+<% end %>

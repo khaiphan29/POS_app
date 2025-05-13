@@ -1,0 +1,10 @@
+<div class='p-[var(--primary-gap)] bg-white shadow-sm'>
+  <h3> <%= heading %> </h3>
+  <p> Tổng cộng <%= @orders.count %> đơn hàng</p>
+</div>
+
+<div class="flex flex-col gap-[var(--primary-gap)]">
+  <% orders.each do |order| %>
+    <%= render 'order_card', order: order %>
+  <% end %>
+</div>

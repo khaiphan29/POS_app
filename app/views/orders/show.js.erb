@@ -1,0 +1,12 @@
+// IIFE to avoid polluting the global scope
+(() => {
+  console.log("show.js.erb");
+  const orderShow = document.getElementById("order-show");
+  orderShow.innerHTML = "<%= j render(partial: 'orders/form', locals: { order: @order }) %>";
+
+  if (orderShow) {
+    orderShow.style.width = "var(--right-section-width)";
+    const sibling = orderShow.previousElementSibling;
+    sibling.style.marginRight = "var(--right-section-width)";
+  }
+})();

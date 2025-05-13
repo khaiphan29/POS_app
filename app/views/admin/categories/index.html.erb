@@ -1,0 +1,17 @@
+<% content_for :main_content do %>
+  <div class='py-4 px-10 border-r-2 border-gray-100 flex-1'>
+    <h2>Danh mục</h2>
+    <div class='flex justify-between items-center'>
+      <p>Tổng cộng <%= @categories.count %> phân loại</p>
+      <%= link_to 'Thêm danh mục', new_admin_category_path, remote: true, class: 'text-blue-500 hover:underline' %>
+    </div>
+    <div class="rounded-md mt-4 flex flex-col gap-[var(--primary-gap)]">
+      <% @categories.each do |category| %>
+        <%= render 'card', category: category %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<% content_for :form_section do %>
+  <%= render 'form', category: @new_category, parent_categories: @categories, url: admin_categories_path %>
+<% end %>

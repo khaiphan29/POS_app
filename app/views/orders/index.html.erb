@@ -1,0 +1,13 @@
+<div class="flex flex-1 gap-[var(--primary-gap)]">
+  <div class='flex-1'>
+    <div class="sticky flex gap-4 p-[var(--primary-gap)] justify-evenly bg-white">
+      <% @statuses.each do |status| %>
+        <%= active_link_to status[:name], orders_path(status: status[:value]), class: 'text-black font-normal', active_class: 'underline' %>
+      <% end %>
+    </div>
+    <% heading = @statuses.find { |s| s[:value] == params[:status].to_i } || {name: "Tất cả"} %>
+    <%= render 'order_section', orders: @orders, heading: heading[:name] %>
+  </div>
+  <div id="order-show" class='fixed top-[var(--top-height)] bottom-0 right-0 bg-white h-[var(--remaining-height)] shadow-lg'>
+  </div>
+</div>

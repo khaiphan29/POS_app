@@ -1,0 +1,2 @@
+STORE_NAME="My Store"
+DUMP_CATEGORY="Khác"

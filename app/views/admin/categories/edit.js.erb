@@ -1,0 +1,5 @@
+(() => {
+  form = document.querySelector('[data-admin-target="form"]')
+  form.innerHTML = "<%= j render(partial: 'form', locals: { category: @category, parent_categories: @parent_categories, url: admin_category_path(@category) }) %>";
+  form.querySelector('h3').innerText = "Chỉnh sửa danh mục";
+})()

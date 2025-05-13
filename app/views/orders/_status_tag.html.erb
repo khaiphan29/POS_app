@@ -1,0 +1,13 @@
+<% status_class = case status.to_sym
+  when :completed
+    'border-green-500 text-green-500'
+  when :pending
+    'border-yellow-500 text-yellow-500'
+  when :cancelled
+    'border-red-500 text-red-500'
+  else
+    'border-gray-500 text-gray-500'
+  end %>
+  <div class="flex items-center gap-2 p-2 border-1 rounded-full font-normal <%= status_class %>">
+    <%= status_string(status) %>
+  </div>

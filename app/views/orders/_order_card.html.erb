@@ -1,0 +1,34 @@
+<div class="bg-white bg-primary-bg p-[var(--primary-gap)]" id="order_<%= order.id %>">
+  <div class='flex gap-4 justify-between items-center'>
+    <div class=''>
+      <h4 class='font-semibold text-lg'>Đơn hàng #<%= order.id %></h4>
+      <p><%= l(order.updated_at, format: :short) %></p>
+    </div>
+    <%= render 'status_tag', status: order.status %>
+  </div>
+
+  <div class="flex gap-2 w-full border-b-1 border-gray-200">
+    <% order.order_items.each do |item| %>
+      <%= render 'orders/item', item: item, cart: false %>
+    <% end %>
+  </div>
+
+  <div class="flex gap-2 mt-2 justify-between items-center">
+    <p class='text-lg font-normal' data-order-target="totalPrice"><%= number_with_delimiter(order.total_price.to_i, delimiter: ",") %> ₫</p>
+    <div class="flex gap-4">
+      <% if order.status != 'canceled' %>
+        <%= button_to "Huỷ đơn", order_path(order), method: :delete, class: "text-red-500 p-[var(--primary-gap)] rounded-lg hover:text-white hover:bg-red-500", data: { confirm: 'Xác nhận huỷ đơn hàng?' } %>
+      <% end %>
+
+      <%= link_to "Xem chi tiết", order_path(order), remote: true, class: "no-underline! p-[var(--primary-gap)] rounded-lg whitespace-nowrap hover:text-white hover:bg-black" %>
+
+      <% if order.status == 'pending' %>
+        <%= button_to "Hoàn tất", order_path(order, status: Order.statuses[:completed]), remote: true, method: :patch, class: "p-[var(--primary-gap)] rounded-lg text-blue-500 whitespace-nowrap hover:text-white hover:bg-blue-500", data: { confirm: 'Xác nhận hoàn tất đơn hàng?' } %>
+      <% end %>
+      <% if order.status == 'completed' && order.updated_at.to_date == Date.current %>
+        <%= button_to "Hoàn tác", order_path(order, status: Order.statuses[:pending]), remote: true, method: :patch, class: "p-[var(--primary-gap)] rounded-lg text-blue-500 whitespace-nowrap hover:text-white hover:bg-blue-500", data: { confirm: 'Xác nhận hoàn tác đơn hàng?' } %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

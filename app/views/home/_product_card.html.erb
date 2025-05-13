@@ -1,0 +1,10 @@
+<button class='bg-white rounded-xl p-[var(--primary-gap)]' data-action="click->order#changeItemQuantity" data-id="<%= product.id %>" data-quantity=1 >
+  <%= image_tag product.image.variant(:detail) %>
+  <div class='mt-2 flex justify-between items-center'>
+    <div class='flex flex-col items-start'>
+      <p class='text-xl font-normal'><%= product.name %></p>
+      <p><%= product.category.name %></p>
+    </div>
+    <p class='text-lg font-normal'><%= number_with_delimiter(product.price.to_i, delimiter: ",") %> ₫</p>
+  </div>
+  </button>

@@ -1,0 +1,28 @@
+<%= form_with model: order, url: checkout_order_path(order), method: :patch, class: 'flex flex-col justify-between h-full', data: {order_target: "form"} do |f| %>
+  <div class="flex-1">
+    <div class="h-[var(--top-height)] w-full flex justify-between items-center shadow-lg shadow-gray-50">
+      <p class='w-full text-center'>
+      Đơn hàng #
+      <%= order.id %>
+      </p>
+    </div>
+
+    <div class="flex flex-col overscroll-x-auto" data-order-target="items">
+      <% order.order_items.each do |item| %>
+        <%= render 'orders/item', item: item, cart: order.cart? %>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <div class="flex justify-between items-center bg-gray-100 p-4">
+      <p>Tổng tiền</p>
+      <p class='text-lg font-normal' data-order-target="totalPrice"><%= number_with_delimiter(order.total_price.to_i, delimiter: ",") %> ₫</p>
+    </div>
+    <% if order.cart? %>
+      <div class="actions">
+        <%= f.submit "Tạo Đơn Hàng" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

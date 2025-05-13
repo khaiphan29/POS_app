@@ -1,0 +1,26 @@
+<div class="h-[10vh] p-[var(--primary-gap)] flex justify-between items-center border-gray-dashed" item-id=<%= item.product.id %> >
+  <div class="flex gap-4 h-full">
+    <%= image_tag url_for(item.product.image.variant(:thumb)), class: "" %>
+    <div class='flex flex-col gap-2 justify-between'>
+      <p class='text-lg font-normal'><%= item.product.name %></p>
+      <p class='text-lg font-normal'><%= number_with_delimiter(item.price.to_i, delimiter: ",") %> ₫</p>
+    </div>
+  </div>
+
+  <% if cart %>
+    <div class="h-full flex flex-col justify-between items-end">
+      <button type="button" data-action="click->order#setItemQuantity" data-id=<%= item.product.id %> data-quantity=0>Xoá</button>
+      <div class="flex gap-2 items-center justify-end" >
+        <button class='' data-action="click->order#changeItemQuantity" data-id=<%= item.product.id %> data-quantity=-1>
+          <%= render 'shared/icons/remove' , custom_class: "text-black h-[1rem]" %>
+        </button>
+        <input type='number' class="no-spinner w-[4ch]! text-lg border-0! p-0! m-0 text-center" value=<%= item.quantity %> data-action="keydown->order#setItemQuantity" data-id=<%= item.product.id %> />
+        <button class='' data-action="click->order#changeItemQuantity" data-id=<%= item.product.id %> data-quantity=1>
+          <%= render 'shared/icons/add' , custom_class: "text-black h-[1rem]" %>
+        </button>
+      </div>
+    </div>
+  <% else %>
+    <p class="h-full text-lg border-0! p-0! ml-2 flex items-end">x <%= item.quantity %> </p>
+  <% end %>
+</div>

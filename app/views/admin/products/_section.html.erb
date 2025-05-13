@@ -1,0 +1,25 @@
+<div class='mb-4 w-full'>
+  <div class="mb-[var(--primary-gap)]">
+    <h3 class='text-center'> <%= category.name %> </h3>
+  </div>
+
+  <% product_container_class = "flex flex-col divide-y divide-gray-200" %>
+
+  <div class="<%= product_container_class %>">
+    <% category.products.each do |product| %>
+      <%= render 'product_card', product: product %>
+    <% end %>
+  </div>
+
+  <% category.children.each do |child| %>
+    <div class="border-gray-200 mb-[var(--primary-gap)]">
+      <h4 class='font-semibold text-xl'> <%= child.name %> </h4>
+    </div>
+
+    <div class="<%= product_container_class %>">
+      <% child.products.each do |product| %>
+        <%= render 'product_card', product: product %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

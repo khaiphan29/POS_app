@@ -1,0 +1,12 @@
+(() => {
+  const params = new URLSearchParams(window.location.search);
+  const pageStatus = params.get("status");
+
+  const order = document.getElementById('order_<%= @order.id %>');
+  if (!pageStatus) {
+    order.outerHTML = "<%= j render(partial: 'order_card', locals: { order: @order }) %>";
+  } else {
+    order.remove();
+  }
+})();
+
